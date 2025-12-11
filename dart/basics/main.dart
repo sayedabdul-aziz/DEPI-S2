@@ -1,12 +1,7 @@
-void main() {
-  List<int> numbers = [1, 2, 3, 4, 5];
-  for (var number in numbers) {
-    print(number);
-  }
+import 'dart:io';
 
-  numbers.forEach((value) {
-    print(value);
-  });
+void main() {
+  String name = stdin.readLineSync() ?? '';
 
   display("John", 20);
   display1("John", 21);
@@ -40,10 +35,10 @@ void display4(String name, {required String gender, int age = 20}) {
   print("name : $name, age : $age");
 }
 
-int fact(int n){
-  if(n==1){
+int fact(int n) {
+  if (n == 1) {
     return 1;
-  }else{
-   return n*fact(n-1); // 5*4*3*2*1
+  } else {
+    return n * fact(n - 1); // 5*4*3*2*1
   }
 }

@@ -1,13 +1,9 @@
 import 'person.dart';
 
-main() {
-  Person p1 = Person();
-  p1.name = "Ahmed";
-  p1.age = 21;
+void main() {
+  Person p1 = Person(name: "Ahmed", age: 20, gender: "male");
   p1.display();
 
-  Person p2 = Person();
-  p2.name = "Ali";
-  p2.age = 21;
+  Person p2 = Person.fromJson({"name": "Ali", "age": 21, "gender": "male"});
   p2.display();
 }
