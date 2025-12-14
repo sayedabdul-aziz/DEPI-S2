@@ -1,8 +1,10 @@
+enum Gender { male, female, other }
+
 class Person {
   // attr.
   String? name;
   int? age;
-  String? gender;
+  Gender? gender;
 
   Person({required this.name, required this.age, required this.gender});
   factory Person.fromJson(Map<String, dynamic> json) {
