@@ -8,7 +8,7 @@ class MainButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.bgColor = AppColors.primaryColor,
-    this.height = 67,
+    this.height = 55,
     this.width = double.infinity,
     this.textStyle,
   });
@@ -28,7 +28,15 @@ class MainButton extends StatelessWidget {
         minimumSize: Size(width, height),
       ),
       onPressed: onPressed,
-      child: Text(text, style: textStyle ?? TextStyles.subtitle),
+      child: Text(
+        text,
+        style:
+            textStyle ??
+            TextStyles.body.copyWith(
+              color: AppColors.backgroundColor,
+              fontWeight: FontWeight.w600,
+            ),
+      ),
     );
   }
 }

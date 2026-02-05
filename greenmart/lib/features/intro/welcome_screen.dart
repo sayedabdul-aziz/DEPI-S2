@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:greenmart/core/constants/app_images.dart';
+import 'package:greenmart/core/functions/navigations.dart';
 import 'package:greenmart/core/styles/colors.dart';
 import 'package:greenmart/core/styles/text_styles.dart';
 import 'package:greenmart/core/widgets/main_button.dart';
+import 'package:greenmart/features/auth/page/login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -61,7 +63,9 @@ class WelcomeScreen extends StatelessWidget {
                 SizedBox(height: 30),
                 MainButton(
                   text: 'Get Started',
-                  onPressed: () {},
+                  onPressed: () {
+                    pushReplacement(context, LoginScreen());
+                  },
                   textStyle: TextStyles.subtitle.copyWith(
                     color: AppColors.backgroundColor,
                   ),
