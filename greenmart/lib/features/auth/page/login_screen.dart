@@ -46,14 +46,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 16),
                   Text(
                     'Enter your emails and password',
-                    style: TextStyles.caption.copyWith(
+                    style: TextStyles.caption1.copyWith(
                       color: AppColors.greyColor,
                     ),
                   ),
                   SizedBox(height: 40),
                   Text(
                     'Email',
-                    style: TextStyles.caption.copyWith(
+                    style: TextStyles.caption1.copyWith(
                       color: AppColors.greyColor,
                       fontWeight: FontWeight.w600,
                     ),
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 16),
                   Text(
                     'Password',
-                    style: TextStyles.caption.copyWith(
+                    style: TextStyles.caption1.copyWith(
                       color: AppColors.greyColor,
                       fontWeight: FontWeight.w600,
                     ),
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Text(
                         'Don\'t have an account?',
-                        style: TextStyles.small.copyWith(
+                        style: TextStyles.caption2.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {},
                         child: Text(
                           'Sign Up',
-                          style: TextStyles.small.copyWith(
+                          style: TextStyles.caption2.copyWith(
                             fontWeight: FontWeight.w600,
                             color: AppColors.primaryColor,
                           ),
