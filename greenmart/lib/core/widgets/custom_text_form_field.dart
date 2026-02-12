@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.enabled = true,
     this.onTap,
+    this.onChanged,
   });
   final String? hintText;
   final Widget? prefixIcon;
@@ -18,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool enabled;
   final Function()? onTap;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class CustomTextFormField extends StatelessWidget {
       ),
       validator: validator,
       onTap: onTap,
+      onChanged: onChanged,
     );
   }
 }

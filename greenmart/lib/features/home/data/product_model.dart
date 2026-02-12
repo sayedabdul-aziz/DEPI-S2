@@ -40,6 +40,7 @@
 
 class ProductModel {
   final String id;
+  final String categoryId;
   final String image;
   final String name;
   final double price;
@@ -47,10 +48,10 @@ class ProductModel {
 
   ProductModel({
     required this.id,
+    required this.categoryId,
     required this.image,
     required this.name,
     required this.price,
     required this.quantityForPrice,
   });
 }
-

@@ -8,4 +8,5 @@ class AppColors {
   static const Color accentColor = Color(0xffF0F1F2);
   static const Color backgroundColor = Colors.white;
   static const Color redColor = Color(0xffEB5757);
+  static const Color borderColor = Color(0xffE2E2E2);
 }

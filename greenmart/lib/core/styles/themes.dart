@@ -14,8 +14,11 @@ class AppThemes {
         foregroundColor: AppColors.primaryColor,
       ),
     ),
+    dividerColor: Colors.transparent,
+    dividerTheme: DividerThemeData(color: AppColors.borderColor),
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.backgroundColor,
+      centerTitle: true,
       surfaceTintColor: Colors.transparent,
     ),
     colorScheme: ColorScheme.fromSeed(
