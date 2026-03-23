@@ -1,5 +1,6 @@
-import 'package:counter_with_cubit/cubit/counter_cubit.dart';
-import 'package:counter_with_cubit/cubit/counter_state.dart';
+import 'package:counter_with_cubit/bloc/counter_bloc.dart';
+import 'package:counter_with_cubit/bloc/counter_event.dart';
+import 'package:counter_with_cubit/bloc/counter_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +18,7 @@ class CounterScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          BlocConsumer<CounterCubit, CounterState>(
+          BlocConsumer<CounterBloc, CounterState>(
             listener: (context, state) {
               if (state is CounterUpdatedState && state.isIncrement) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -37,7 +38,8 @@ class CounterScreen extends StatelessWidget {
               }
             },
             builder: (context, state) {
-              if (state is CounterUpdatedState) {
+              if (state is CounterUpdatedState ||
+                  state is CounterInitialState) {
                 return Text(
                   state.counter.toString(),
                   style: const TextStyle(
@@ -57,14 +59,14 @@ class CounterScreen extends StatelessWidget {
               IconButton(
                 style: IconButton.styleFrom(backgroundColor: Colors.black),
                 onPressed: () {
-                  context.read<CounterCubit>().decrement();
+                  context.read<CounterBloc>().add(DecrementEvent());
                 },
                 icon: const Icon(Icons.remove, color: Colors.white),
               ),
               IconButton(
                 style: IconButton.styleFrom(backgroundColor: Colors.black),
                 onPressed: () {
-                  context.read<CounterCubit>().increment();
+                  context.read<CounterBloc>().add(IncrementEvent());
                 },
                 icon: const Icon(Icons.add, color: Colors.white),
               ),

@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:taskati/core/constants/app_images.dart';
 import 'package:taskati/core/functions/extensions.dart';
+import 'package:taskati/core/presentation/cubit/theme_cubit.dart';
 import 'package:taskati/core/services/hive_helper.dart';
 import 'package:taskati/core/styles/text_styles.dart';
 
@@ -58,9 +60,8 @@ class _HomeHeaderState extends State<HomeHeader> {
 
         IconButton(
           onPressed: () {
-            bool isDarkMode = context.isDarkMode;
-            HiveHelper.cacheData(HiveHelper.isDarkModeKey, !isDarkMode);
-            setState(() {});
+            // theme
+            context.read<ThemeCubit>().changeTheme();
           },
           icon: Icon(context.isDarkMode ? Icons.light_mode : Icons.dark_mode),
         ),
