@@ -1,17 +1,17 @@
 import 'package:bookia/core/constants/app_images.dart';
-import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/routes/navigations.dart';
 import 'package:bookia/core/styles/colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_svg_picture.dart';
 import 'package:bookia/core/widgets/custom_text_form_field.dart';
 import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/my_body_view.dart';
-import 'package:bookia/feature/auth/presentation/login_register/page/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
-  const ForgotPasswordScreen({super.key});
+  const ForgotPasswordScreen({super.key, required this.email});
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +32,11 @@ class ForgotPasswordScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Forgot Password?',
-                style: TextStyles.headline,
-              ),
+              Text('Forgot Password?', style: TextStyles.headline),
               Gap(10),
               Text(
                 'Don\'t worry! It occurs. Please enter the email address linked with your account.',
-                style: TextStyles.body.copyWith(
-                  color: AppColors.darkGreyColor,
-                ),
+                style: TextStyles.body.copyWith(color: AppColors.darkGreyColor),
               ),
               Gap(32),
               CustomTextFormField(hintText: 'Enter your email'),
@@ -63,9 +58,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {
-                pushReplacement(context, const LoginScreen());
-              },
+              onPressed: () {},
               child: Text(
                 'Login',
                 style: TextStyles.caption1.copyWith(
