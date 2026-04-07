@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/functions/validations.dart';
 import 'package:bookia/core/routes/navigations.dart';
@@ -26,8 +24,7 @@ class RegisterScreen extends StatelessWidget {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccessState) {
-          pop(context);
-          log("success");
+          pushToBase(context, Routes.main);
         } else if (state is AuthErrorState) {
           pop(context);
           showErrorDialog(context, state.message);
