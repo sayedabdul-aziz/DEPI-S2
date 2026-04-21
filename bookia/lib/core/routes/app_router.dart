@@ -3,6 +3,8 @@ import 'package:bookia/feature/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/feature/auth/presentation/forget_password/page/forgot_password_screen.dart';
 import 'package:bookia/feature/auth/presentation/login_register/page/login_screen.dart';
 import 'package:bookia/feature/auth/presentation/login_register/page/register_screen.dart';
+import 'package:bookia/feature/details/page/details_screen.dart';
+import 'package:bookia/feature/home/data/model/best_seller_response/product.dart';
 import 'package:bookia/feature/main/main_app_screen.dart';
 import 'package:bookia/feature/splash/cubit/splash_cubit.dart';
 import 'package:bookia/feature/splash/page/splash_screen.dart';
@@ -58,6 +60,12 @@ class AppRouter {
         path: Routes.main,
         builder: (context, state) {
           return MainAppScreen();
+        },
+      ),
+      GoRoute(
+        path: Routes.details,
+        builder: (context, state) {
+          return DetailsScreen(model: state.extra as Product,);
         },
       ),
     ],

@@ -3,6 +3,8 @@ import 'package:bookia/core/styles/colors.dart';
 import 'package:bookia/core/widgets/custom_svg_picture.dart';
 import 'package:bookia/feature/home/presentation/cubit/home_cubit.dart';
 import 'package:bookia/feature/home/presentation/page/home_screen.dart';
+import 'package:bookia/feature/wishlist/presentation/cubit/wishlist_cubit.dart';
+import 'package:bookia/feature/wishlist/presentation/page/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,14 +23,17 @@ class _MainAppScreenState extends State<MainAppScreen> {
       create: (context) => HomeCubit()..loadInitData(),
       child: HomeScreen(),
     ),
-    Container(),
+    BlocProvider(
+      create: (context) => WishlistCubit()..getWishlist(),
+      child: WishlistScreen(),
+    ),
     Container(),
     Container(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: currentIndex, children: screens),
+      body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) => setState(() => currentIndex = index),

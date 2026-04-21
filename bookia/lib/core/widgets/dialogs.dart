@@ -4,17 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 
-void showErrorDialog(BuildContext context, String errorMsg) {
+enum DialogType { error, success }
+
+void showToast(
+  BuildContext context,
+  String errorMsg, [
+  DialogType type = DialogType.error,
+]) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       behavior: SnackBarBehavior.floating,
       margin: const EdgeInsets.all(10),
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      backgroundColor: AppColors.errorColor,
+      backgroundColor: type == DialogType.error
+          ? AppColors.errorColor
+          : AppColors.primaryColor,
       content: Row(
         children: [
-          const Icon(Icons.error, color: AppColors.backgroundColor, size: 20),
+          Icon(
+            type == DialogType.error ? Icons.error : Icons.check_circle,
+            color: AppColors.backgroundColor,
+            size: 20,
+          ),
           const Gap(10),
           Text(errorMsg),
         ],

@@ -1,9 +1,9 @@
+import 'package:bookia/core/widgets/shimmer/shimmer_book_card.dart';
 import 'package:flutter/material.dart';
 
 class ShimmerGridView extends StatelessWidget {
   const ShimmerGridView({
     super.key,
-    required this.itemBuilder,
     this.itemCount = 6,
     this.crossAxisCount = 2,
     this.mainAxisSpacing = 10,
@@ -12,7 +12,6 @@ class ShimmerGridView extends StatelessWidget {
     this.padding,
   });
 
-  final Widget Function(BuildContext context, int index) itemBuilder;
   final int itemCount;
   final int crossAxisCount;
   final double mainAxisSpacing;
@@ -33,7 +32,7 @@ class ShimmerGridView extends StatelessWidget {
         mainAxisExtent: mainAxisExtent,
       ),
       itemCount: itemCount,
-      itemBuilder: itemBuilder,
+      itemBuilder: (context, index) => ShimmerBookCard(),
     );
   }
 }
