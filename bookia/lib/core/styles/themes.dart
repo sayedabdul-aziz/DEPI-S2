@@ -24,7 +24,7 @@ abstract class AppThemes {
     ),
     inputDecorationTheme: InputDecorationTheme(
       hintStyle: TextStyles.body.copyWith(color: AppColors.greyColor),
-      fillColor: AppColors.accentColor,
+      fillColor: AppColors.white,
       filled: true,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),

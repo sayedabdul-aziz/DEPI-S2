@@ -3,9 +3,9 @@ import 'package:bookia/core/routes/navigations.dart';
 import 'package:bookia/core/styles/colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_svg_picture.dart';
-import 'package:bookia/core/widgets/main_button.dart';
 import 'package:bookia/core/widgets/my_body_view.dart';
 import 'package:bookia/core/widgets/shimmer/shimmer_text.dart';
+import 'package:bookia/feature/cart/presentation/widgets/cart_action/cart_action_widget.dart';
 import 'package:bookia/feature/home/data/model/best_seller_response/product.dart';
 import 'package:bookia/feature/wishlist/presentation/widgets/wishlist_action/wishlist_action.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -90,7 +90,7 @@ class DetailsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('${model.price} \$', style: TextStyles.title),
-            MainButton(minWidth: 200, text: 'Add To Cart', onPressed: () {}),
+            CartActionWidget(productId: model.id ?? 0),
           ],
         ),
       ),

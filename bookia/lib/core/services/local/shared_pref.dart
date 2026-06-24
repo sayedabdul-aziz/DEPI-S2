@@ -8,6 +8,8 @@ class SharedPref {
 
   static const String kToken = 'token';
   static const String kUserInfo = 'user';
+  static const String kWishlist = 'wishlist';
+  static const String kCart = 'cart';
 
   static Future<void> init() async {
     sharedPreferences = await SharedPreferences.getInstance();
@@ -36,12 +38,46 @@ class SharedPref {
     return User.fromJson(json);
   }
 
+  static void setWishlist(List<int> wishlistIds) {
+    // convert List<int> => list<String>
+    var listOfString = wishlistIds.map((e) => e.toString()).toList();
+    // save listOfString in shared preferences
+    setStringList(kWishlist, listOfString);
+  }
+
+  static List<int> getWishlist() {
+    // get list of strings from shared preferences
+    var listOfString = getStringList(kWishlist);
+    if (listOfString.isEmpty) return [];
+    // convert list of strings => list of ints
+    return listOfString.map((e) => int.tryParse(e) ?? 0).toList();
+  }
+
+  static void setCart(List<int> cartIds) {
+    var listOfString = cartIds.map((e) => e.toString()).toList();
+    setStringList(kCart, listOfString);
+  }
+
+  static List<int> getCart() {
+    var listOfString = getStringList(kCart);
+    if (listOfString.isEmpty) return [];
+    return listOfString.map((e) => int.tryParse(e) ?? 0).toList();
+  }
+
   static Future<void> setString(String key, String value) async {
     await sharedPreferences.setString(key, value);
   }
 
   static String getString(String key) {
     return sharedPreferences.getString(key) ?? '';
+  }
+
+  static void setStringList(String key, List<String> value) {
+    sharedPreferences.setStringList(key, value);
+  }
+
+  static List<String> getStringList(String key) {
+    return sharedPreferences.getStringList(key) ?? [];
   }
 
   static Future<void> setBool(String key, bool value) async {

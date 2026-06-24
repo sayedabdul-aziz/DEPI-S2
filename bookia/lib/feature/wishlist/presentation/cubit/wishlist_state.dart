@@ -9,5 +9,4 @@ class GetWishlistLoaded extends WishlistState {
   GetWishlistLoaded({this.message});
 }
 
-
 class GetWishlistError extends WishlistState {}

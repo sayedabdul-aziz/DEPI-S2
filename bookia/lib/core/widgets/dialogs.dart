@@ -15,6 +15,7 @@ void showToast(
     SnackBar(
       behavior: SnackBarBehavior.floating,
       margin: const EdgeInsets.all(10),
+      duration: const Duration(milliseconds: 700),
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: type == DialogType.error

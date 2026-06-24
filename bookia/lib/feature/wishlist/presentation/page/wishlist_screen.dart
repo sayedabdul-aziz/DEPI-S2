@@ -1,12 +1,11 @@
-import 'dart:developer';
-
-import 'package:bookia/core/services/local/shared_pref.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
 import 'package:bookia/core/widgets/my_body_view.dart';
 import 'package:bookia/core/widgets/shimmer/shimmer_grid_view.dart';
 import 'package:bookia/feature/home/presentation/widgets/book_card.dart';
 import 'package:bookia/feature/wishlist/presentation/cubit/wishlist_cubit.dart';
 import 'package:bookia/feature/wishlist/presentation/cubit/wishlist_state.dart';
+import 'package:bookia/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,9 +14,8 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(SharedPref.getToken());
     return Scaffold(
-      appBar: AppBar(title: Text('Wishlist')),
+      appBar: AppBar(title: Text(LocaleKeys.wishlist.tr())),
       body: MyBodyView(
         child: BlocConsumer<WishlistCubit, WishlistState>(
           listener: (context, state) {
@@ -57,6 +55,11 @@ class WishlistScreen extends StatelessWidget {
                 var book = cubit.wishlistProducts[index];
                 return BookCard(
                   book: book,
+                  onRefresh: () {
+                    if (cubit.checkIfWishlistChanged()) {
+                      cubit.getWishlist();
+                    }
+                  },
                   onRemoveFromWishlist: () {
                     cubit.removeFromWishlist(book.id!);
                   },
