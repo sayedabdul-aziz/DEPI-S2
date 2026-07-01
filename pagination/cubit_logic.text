@@ -1,0 +1,88 @@
+   int inboxesPage = 0;
+  bool hasMoreInboxes = false;
+  bool isLoadingMoreInboxes = false;
+ 
+ Future<void> _loadInboxesInternal() async {
+    inboxesPage = 0;
+    hasMoreInboxes = false;
+    isLoadingMoreInboxes = false;
+
+    final response = await _inboxRepository.getInboxList(
+      page: inboxesPage,
+      archived: false,
+    );
+
+    response.fold(
+      (failure) => log('❌ Failed to load inboxes: $failure'),
+      (data) {
+        inboxList = data.inboxes ?? [];
+        hasMoreInboxes = data.pagination?.hasNext ?? false;
+      },
+    );
+  }
+
+
+
+  Future<void> fetchMoreInboxes() async {
+    if (state is! InboxLoadedState) return;
+    if (!hasMoreInboxes || isLoadingMoreInboxes) return;
+
+    isLoadingMoreInboxes = true;
+    emit(InboxLoadedState());
+
+    try {
+      inboxesPage++;
+
+      final response = await _inboxRepository.getInboxList(
+        page: inboxesPage,
+        archived: false,
+      );
+
+      response.fold(
+        (failure) {
+          isLoadingMoreInboxes = false;
+          emit(InboxErrorState());
+        },
+        (data) {
+          inboxList.addAll(data.inboxes ?? []);
+          hasMoreInboxes = data.pagination?.hasNext ?? false;
+          isLoadingMoreInboxes = false;
+          _updateIndicator();
+          emit(InboxLoadedState());
+        },
+      );
+    } catch (e) {
+      isLoadingMoreInboxes = false;
+      emit(InboxLoadedState());
+    }
+  }
+
+
+
+  PaginatedListView<InboxItem>(
+                items: pendingInboxes,
+                scrollDirection: Axis.horizontal,
+                emptyWidget: const SizedBox.shrink(),
+                padding: const EdgeInsets.only(left: 20),
+                onLoadMore: cubit.fetchMorePendingInboxes,
+                hasMore: cubit.hasMorePendingInboxes,
+                isLoadingMore: cubit.isLoadingMorePendingInboxes,
+                itemBuilder: (context, inbox, index) => InkWell(
+                  onTap: () {
+                    pushTo(context, Routes.tradeboxScreen,
+                        extra: TradeboxScreenArgs(
+                          userId: inbox.user?.id,
+                          isFromInbox: true,
+                        )).then((value) async {
+                      await cubit.fetchInboxes(
+                          forceRefresh: true, isLoading: false);
+                    });
+                  },
+                  child: UserAvatarWithCountDown(
+                    key: ValueKey(inbox.inboxId),
+                    imageUrl: inbox.user?.image,
+                    onExpired: () {},
+                    index: index,
+                  ),
+                ),
+              ),
