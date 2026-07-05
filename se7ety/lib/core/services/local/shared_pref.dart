@@ -1,7 +1,29 @@
+import 'dart:convert';
+
+import 'package:se7ety/features/auth/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
   static late SharedPreferences pref;
+
+  static final String kUserData = 'user_data';
+
+  static Future<void> init() async {
+    pref = await SharedPreferences.getInstance();
+  }
+
+  static void setUserData(UserModel model) {
+    var jsonToString = json.encode(model.toJson());
+    setData(kUserData, jsonToString);
+  }
+
+  static UserModel? getUserData() {
+    var data = getData(kUserData);
+    if (data != null) {
+      return UserModel.fromJson(json.decode(data));
+    }
+    return null;
+  }
 
   static void setData(String key, dynamic value) {
     if (value is int) {

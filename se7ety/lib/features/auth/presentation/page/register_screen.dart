@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -39,8 +37,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Navigator.pop(context);
           showMyDialog(context, state.message);
         } else if (state is AuthSuccessState) {
-          Navigator.pop(context);
-          log("Success");
+          if (state.userType == UserTypeEnum.doctor) {
+            pushToBase(context, Routes.doctorRegistration);
+          } else {
+            // main
+          }
         }
       },
       child: Scaffold(
@@ -106,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     MainButton(
                       onPressed: () async {
                         if (cubit.formKey.currentState!.validate()) {
-                          cubit.register();
+                          cubit.register(widget.userType);
                         }
                       },
                       text: "تسجيل حساب جديد",

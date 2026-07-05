@@ -45,6 +45,9 @@ class MainApp extends StatelessWidget {
 // Firebase Auth (User Management) => login / register / logout => User Model(id, name, email , imageUrl)
 // Firebase Firestore (Main Database) => CRUD (Create / Read / Update / Delete)
 
+// Image Uploader => Cloudinary / Firebase Storage / Supabase Storage
+// Get Image Url => store image url in user model => Firebase Firestore
+
 // Collection => List<Document> => Document => Data {}
 
 // Firebase Sdk => classes with methods
