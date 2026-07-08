@@ -40,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           if (state.userType == UserTypeEnum.doctor) {
             pushToBase(context, Routes.doctorRegistration);
           } else {
-            // main
+            pushToBase(context, Routes.mainPatient);
           }
         }
       },

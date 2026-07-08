@@ -7,6 +7,7 @@ class SharedPref {
   static late SharedPreferences pref;
 
   static final String kUserData = 'user_data';
+  static final String kOnboarding = 'onboarding';
 
   static Future<void> init() async {
     pref = await SharedPreferences.getInstance();
@@ -23,6 +24,14 @@ class SharedPref {
       return UserModel.fromJson(json.decode(data));
     }
     return null;
+  }
+
+  static void setOnboarding() {
+    setData(kOnboarding, true);
+  }
+
+  static bool getOnboarding() {
+    return getData(kOnboarding) ?? false;
   }
 
   static void setData(String key, dynamic value) {
