@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:se7ety/components/buttons/main_button.dart';
 import 'package:se7ety/core/routes/navigation.dart';
 import 'package:se7ety/core/routes/routes.dart';
+import 'package:se7ety/core/services/local/shared_pref.dart';
 import 'package:se7ety/core/utils/colors.dart';
 import 'package:se7ety/core/utils/text_styles.dart';
 import 'package:se7ety/features/auth/data/models/doctor_model.dart';
@@ -21,7 +22,24 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('بيانات الدكتور')),
+      appBar: AppBar(
+        title: const Text('بيانات الدكتور'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.chat_bubble_outline_rounded),
+            onPressed: () {
+              final patientId = SharedPref.getUserData()?.uid ?? '';
+              final doctorId = widget.doctorModel?.uid ?? '';
+              pushTo(context, Routes.chat, extra: {
+                'patientId': patientId,
+                'patientName': SharedPref.getUserData()?.name ?? '',
+                'doctorId': doctorId,
+                'doctorName': 'د. ${widget.doctorModel?.name ?? ''}',
+              });
+            },
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(

@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
             showMyDialog(context, state.message);
           } else if (state is AuthSuccessState) {
             if (state.userType == UserTypeEnum.doctor) {
-              // pushToBase(context, Routes.mainDoctor);
+              pushToBase(context, Routes.mainDoctor);
             } else {
               pushToBase(context, Routes.mainPatient);
             }

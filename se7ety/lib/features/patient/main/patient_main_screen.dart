@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:se7ety/core/utils/colors.dart';
 import 'package:se7ety/core/utils/text_styles.dart';
+import 'package:se7ety/features/patient/appointments/page/appointments_screen.dart';
+import 'package:se7ety/features/patient/chats/page/patient_chats_screen.dart';
 import 'package:se7ety/features/patient/home/presentation/page/home_screen.dart';
+import 'package:se7ety/features/patient/profile/page/patient_profile_screen.dart';
 import 'package:se7ety/features/patient/search/page/search_screen.dart';
 
 class PatientMainAppScreen extends StatefulWidget {
@@ -14,11 +17,13 @@ class PatientMainAppScreen extends StatefulWidget {
 
 class _MainPageState extends State<PatientMainAppScreen> {
   int _selectedIndex = 0;
+
   final List _pages = [
     const PatientHomeScreen(),
     const SearchScreen(),
-    //   const MyAppointmentsScreen(),
-    //   const PatientProfileScreen(),
+    const MyAppointmentsScreen(),
+    const PatientChatsScreen(),
+    const PatientProfileScreen(),
   ];
 
   @override
@@ -34,7 +39,10 @@ class _MainPageState extends State<PatientMainAppScreen> {
             topRight: Radius.circular(20),
           ),
           boxShadow: [
-            BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.2)),
+            BoxShadow(
+              blurRadius: 20,
+              color: Colors.black.withValues(alpha: .2),
+            ),
           ],
         ),
         child: GNav(
@@ -56,6 +64,11 @@ class _MainPageState extends State<PatientMainAppScreen> {
               iconSize: 28,
               icon: Icons.calendar_month_rounded,
               text: 'المواعيد',
+            ),
+            GButton(
+              iconSize: 28,
+              icon: Icons.chat_bubble_outline_rounded,
+              text: 'المحادثات',
             ),
             GButton(iconSize: 29, icon: Icons.person, text: 'الحساب'),
           ],

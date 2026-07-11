@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:se7ety/features/auth/data/models/doctor_model.dart';
+import 'package:se7ety/features/chat/page/chat_screen.dart';
+import 'package:se7ety/features/doctor/main/doctor_main_screen.dart';
 import 'package:se7ety/features/auth/data/models/user_type_enum.dart';
 import 'package:se7ety/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:se7ety/features/auth/presentation/page/login_screen.dart';
@@ -13,6 +15,8 @@ import 'package:se7ety/features/patient/booking/presentation/booking_screen.dart
 import 'package:se7ety/features/patient/doctor_profile/page/doctor_profile_screen.dart';
 import 'package:se7ety/features/patient/home/presentation/page/specialization_search_screen.dart';
 import 'package:se7ety/features/patient/main/patient_main_screen.dart';
+import 'package:se7ety/features/patient/settings/page/settings_view.dart';
+import 'package:se7ety/features/patient/settings/page/user_details.dart';
 import 'package:se7ety/features/update_doctor/cubit/update_doctor_profile_cubit.dart';
 import 'package:se7ety/features/update_doctor/page/doctor_registeration_screen.dart';
 
@@ -31,6 +35,9 @@ class Routes {
   static const String doctorProfile = '/doctorProfile';
   static const String bookingScreen = '/bookingScreen';
   static const String settings = '/settings';
+  static const String updatePatient = '/updatePatient';
+  static const String chat = '/chat';
+  static const String mainDoctor = '/mainDoctor';
 
   static final routes = GoRouter(
     navigatorKey: navigatorKey,
@@ -83,6 +90,30 @@ class Routes {
         path: bookingScreen,
         builder: (context, state) =>
             BookingScreen(doctor: state.extra as DoctorModel),
+      ),
+      GoRoute(
+        path: settings,
+        builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: updatePatient,
+        builder: (context, state) => const UpdatePatientScreen(),
+      ),
+      GoRoute(
+        path: chat,
+        builder: (context, state) {
+          final args = state.extra as Map<String, String>;
+          return ChatScreen(
+            patientId: args['patientId']!,
+            patientName: args['patientName'] ?? '',
+            doctorId: args['doctorId']!,
+            doctorName: args['doctorName']!,
+          );
+        },
+      ),
+      GoRoute(
+        path: mainDoctor,
+        builder: (context, state) => const DoctorMainScreen(),
       ),
     ],
   );

@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
       var user = SharedPref.getUserData();
       if (user != null) {
         if (user.userType == UserTypeEnum.doctor.value) {
-          pushWithReplacement(context, Routes.mainPatient);
+          pushWithReplacement(context, Routes.mainDoctor);
         } else {
           pushWithReplacement(context, Routes.mainPatient);
         }

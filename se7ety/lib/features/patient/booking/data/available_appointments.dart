@@ -1,3 +1,5 @@
+import 'package:se7ety/core/extentions/extension.dart';
+
 List<int> getAvailableAppointments(
   DateTime selectedDate,
   String start,
@@ -9,20 +11,12 @@ List<int> getAvailableAppointments(
   List<int> availableHours = [];
   // 5 - 10
   for (int i = startHour; i < endHour; i++) {
-    DateTime configuredDate = DateTime(
-      DateTime.now().year,
-      DateTime.now().month,
-      DateTime.now().day,
-    );
-
-    int diffInDays = selectedDate.difference(configuredDate).inDays;
-    if (diffInDays != 0) {
-      availableHours.add(i);
-    } else {
-      // we are today
+    if (isToday(selectedDate)) {
       if (i > DateTime.now().hour) {
         availableHours.add(i);
       }
+    } else {
+      availableHours.add(i);
     }
   }
 

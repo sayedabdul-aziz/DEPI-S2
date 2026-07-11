@@ -26,6 +26,10 @@ class SharedPref {
     return null;
   }
 
+  static void removeUserData() {
+    remove(kUserData);
+  }
+
   static void setOnboarding() {
     setData(kOnboarding, true);
   }

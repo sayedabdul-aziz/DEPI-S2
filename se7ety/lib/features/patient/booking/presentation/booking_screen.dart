@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
@@ -35,24 +34,11 @@ class _BookingScreenState extends State<BookingScreen> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
 
-  TimeOfDay currentTime = TimeOfDay.now();
   String? booking_hour;
 
   int selectedHour = -1;
 
-  User? user;
-
-  Future<void> _getUser() async {
-    user = FirebaseAuth.instance.currentUser;
-  }
-
   List<int> availableHours = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _getUser();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -268,7 +254,6 @@ class _BookingScreenState extends State<BookingScreen> {
   Future<void> selectDate(BuildContext context) async {
     showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime(2030),
       selectableDayPredicate: (day) {
@@ -291,3 +276,7 @@ class _BookingScreenState extends State<BookingScreen> {
     });
   }
 }
+
+
+// select data => getAppointmentsByDoctorId + data. => [19:00, 20:00, 21:00]
+// availableHours 
