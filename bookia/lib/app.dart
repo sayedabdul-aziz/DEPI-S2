@@ -63,3 +63,13 @@ class MainApp extends StatelessWidget {
 // 70k = flag(Remote Config(isUpdated), "3.4.5")
 
 // SQL VS NOSQL , ERD (PK,FK)
+
+
+
+// Flavor (Staging/ Production)
+
+
+// Deployment to Play Store
+// App Name, Logo
+// Signing Key (keystore)
+// build appBundle

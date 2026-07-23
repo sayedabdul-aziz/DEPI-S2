@@ -1,11 +1,17 @@
+import 'package:bookia/core/di/service_locator.dart';
 import 'package:bookia/feature/auth/data/models/auth_params.dart';
-import 'package:bookia/feature/auth/data/repository/auth_repo.dart';
+import 'package:bookia/feature/auth/domain/usecases/login_usecase.dart';
+import 'package:bookia/feature/auth/domain/usecases/register_usecase.dart';
 import 'package:bookia/feature/auth/presentation/cubit/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitialState());
+
+  final LoginUseCase loginUseCase = getIt<LoginUseCase>();
+
+  final RegisterUseCase registerUseCase = getIt<RegisterUseCase>();
 
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
@@ -19,12 +25,15 @@ class AuthCubit extends Cubit<AuthState> {
       password: passwordController.text,
       email: emailController.text,
     );
-    var data = await AuthRepo.login(params);
-    if (data != null) {
-      emit(AuthSuccessState());
-    } else {
-      emit(AuthErrorState("Something went wrong, Please try again"));
-    }
+    var data = await loginUseCase.call(params);
+    data.fold(
+      (l) {
+        emit(AuthErrorState(l.message ?? ''));
+      },
+      (r) {
+        emit(AuthSuccessState());
+      },
+    );
   }
 
   Future<void> register() async {
@@ -35,11 +44,14 @@ class AuthCubit extends Cubit<AuthState> {
       password: passwordController.text,
       passwordConfirmation: passwordConfirmationController.text,
     );
-    var data = await AuthRepo.register(params);
-    if (data != null) {
-      emit(AuthSuccessState());
-    } else {
-      emit(AuthErrorState("Something went wrong, Please try again"));
-    }
+    var data = await registerUseCase.call(params);
+    data.fold(
+      (l) {
+        emit(AuthErrorState(l.message ?? ''));
+      },
+      (r) {
+        emit(AuthSuccessState());
+      },
+    );
   }
 }
